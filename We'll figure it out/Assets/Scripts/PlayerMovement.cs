@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 //Debug.Log("Skimmed");
-                StopCoroutine("StirGoDown");
+                //StopCoroutine("StirGoDown");
                 StartCoroutine("HurryWithSkim");
                 Stir.gameObject.SetActive(false);
                 Skim.gameObject.SetActive(true);
@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
             StopCoroutine("HurryWithSkim");
             otherGoal = 0;
             otherGoalNumber++;
-            StartCoroutine("StirGoingDown");
+            //StartCoroutine("StirGoingDown");
             Skim.gameObject.SetActive(false);
             Stir.gameObject.SetActive(true);
             skimPercentage.value = 0;
