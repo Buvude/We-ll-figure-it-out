@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Texture2D cursorTexture, cursorTexture2;
+    public Image Player;
+    public Texture2D cursorTexture, FullCursor;
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
-    public Sprite FullLadle, EmptyLadle;
+    public Sprite DownSpriteMan, UpSpriteMan;
     public Canvas Stir, Skim, Ladel;
     public int StartingPercentage = 50, boilingHeat=1, PlayerStrength=1,otherGoal=0, otherGoalGoal=10, otherGoalNumber=0, otherGoalGoalNumber=3;
     private int currentPercentage,CountDown;
@@ -38,7 +39,12 @@ public class PlayerMovement : MonoBehaviour
         stirPercentage.value = currentPercentage;
         if (Input.GetMouseButtonDown(0)&&!lost){
             currentPercentage += PlayerStrength;
+            Player.sprite = DownSpriteMan;
             //otherGoal += 1;
+        }
+        if (Input.GetMouseButtonUp(0) && !lost)
+        {
+            Player.sprite = UpSpriteMan;
         }
         if (Input.GetMouseButtonDown(1) && !lost)
         {
@@ -119,8 +125,19 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    public void mouseCursorChange()
+    public void mouseCursorChangeToEmptyLadle()
     {
-
+        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
     }
+
+    public void mouseCursorChangeToFullLadle()
+    {
+        Cursor.SetCursor(FullCursor, hotSpot, cursorMode);
+    }
+
+    public void mouseCursorChangeToDefaultLadle()
+    {
+        Cursor.SetCursor(null, hotSpot, cursorMode);
+    }
+
 }
