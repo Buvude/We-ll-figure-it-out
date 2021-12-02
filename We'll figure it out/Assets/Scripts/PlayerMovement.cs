@@ -10,18 +10,19 @@ public class PlayerMovement : MonoBehaviour
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
     public Sprite DownSpriteMan, UpSpriteMan;
-    public Canvas Stir, Skim, Ladel;
+    public Canvas Stir, Skim, Ladel, Cutscene;
     public int StartingPercentage = 50, boilingHeat=1, PlayerStrength=1,otherGoal=0, otherGoalGoal=10, otherGoalNumber=0, otherGoalGoalNumber=3;
     private int currentPercentage,CountDown;
     public Slider stirPercentage,skimPercentage;
     private bool lost = false;
-    public Text oGTXT, sTXT;
+    public Text oGTXT, sTXT,CutsceneText;
     void Start()
     {
+        StartCoroutine("OpeningCutscene");
         stirPercentage.value = StartingPercentage;
         currentPercentage = StartingPercentage;
-        StartCoroutine("StirGoingDown");
-        oGTXT.text = otherGoal + "/" + otherGoalGoal + " Right click when this is complete";
+        /*StartCoroutine("StirGoingDown");
+        oGTXT.text = otherGoal + "/" + otherGoalGoal + " Right click when this is complete";*/
     }
 
     // Update is called once per frame
@@ -99,6 +100,30 @@ public class PlayerMovement : MonoBehaviour
             skimPercentage.value = 0;
             stirPercentage.value = 50;
         }
+    }
+    IEnumerator OpeningCutscene()
+    {
+        CutsceneText.text = "Sugar was a valuable commodity that Europeans had trouble making between the 1700’s-1800’s. " +
+            "This required work with a plant that they never mastered, as they were more familiar with things like wheat. " +
+            "Work that would be done through slavery, as they were the ones familiar with sugarcane, the plant used for it.";
+        yield return new WaitForSeconds(21f);
+        CutsceneText.text = "Slaves would use billhooks to harvest them, cutting into the ground to pull them out before cutting the top and the leaves off before loading them onto carts. " +
+            "The plants went to the mill, where they would be squeezed of their juice. " +
+            "Slaves in the mill were often fatigued and at risk of losing an arm.";
+        yield return new WaitForSeconds(18f);
+        CutsceneText.text = "Afterwards, the juice would go to the boiling house where it would be boiled and skimmed until it could be transferred to a smaller vat; " +
+            "the cycle repeats until a thick viscous sugar liquid is produced. " +
+            "That was then drained, and the leftovers were dried.";
+        yield return new WaitForSeconds(18f);
+        CutsceneText.text = "This left them with a decent-sized sugar crystal that would be broken down before being sold. " +
+            "The heat and intensive labor was grueling to the point where could have the potential to give slaves heatstroke or worse. " +
+            "You are a slave working at the final step of this portion of the process.";
+        yield return new WaitForSeconds(18f);
+        Stir.gameObject.SetActive(true);
+        Cutscene.gameObject.SetActive(false);
+        StartCoroutine("StirGoingDown");
+        oGTXT.text = otherGoal + "/" + otherGoalGoal + " Right click when this is complete";
+
     }
     IEnumerator StirGoingDown()
     {
