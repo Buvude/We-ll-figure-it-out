@@ -1171,6 +1171,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c4abe384e1e32489d8143f0be57140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 0}
+  cursorTexture2: {fileID: 0}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
+  FullLadle: {fileID: 0}
+  EmptyLadle: {fileID: 0}
   Stir: {fileID: 723721151}
   Skim: {fileID: 514893114}
   Ladel: {fileID: 0}

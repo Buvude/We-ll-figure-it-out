@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Texture2D cursorTexture, cursorTexture2;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
+    public Sprite FullLadle, EmptyLadle;
     public Canvas Stir, Skim, Ladel;
     public int StartingPercentage = 50, boilingHeat=1, PlayerStrength=1,otherGoal=0, otherGoalGoal=10, otherGoalNumber=0, otherGoalGoalNumber=3;
     private int currentPercentage,CountDown;
@@ -114,5 +118,9 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("Lost");
             }
         }
+    }
+    public void mouseCursorChange()
+    {
+
     }
 }
