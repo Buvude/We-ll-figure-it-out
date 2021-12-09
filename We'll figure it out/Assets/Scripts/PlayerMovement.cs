@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public Button rPot, lPot, chutebtn;
     public bool PressToContinue, LadelFull, LadelMode, sugarInLadelCooked, cookedSugarOut;
     public int chute, LeftPot, RightPot;
-    public Image Player;
+    public Image Player, cutsceneBackground, background1, background2;
     public Texture2D cursorTexture, FullCursor;
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
@@ -142,6 +142,8 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
         }
+        cutsceneBackground.enabled = false;
+        background2.enabled = true;
         CutsceneText.text = "Slaves would use billhooks to harvest them, cutting into the ground to pull them out before cutting the top and the leaves off before loading them onto carts. " +
             "The plants went to the mill, where they would be squeezed of their juice. " +
             "Slaves in the mill were often fatigued and at risk of losing an arm.";
@@ -154,6 +156,8 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
         }
+        background2.enabled = false;
+        background1.enabled = true;
         CutsceneText.text = "Afterwards, the juice would go to the boiling house where it would be boiled and skimmed until it could be transferred to a smaller vat; " +
             "the cycle repeats until a thick viscous sugar liquid is produced. " +
             "That was then drained, and the leftovers were dried.";
@@ -178,6 +182,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
         }
+
         Stir.gameObject.SetActive(true);
         Cutscene.gameObject.SetActive(false);
         StartCoroutine("StirGoingDown");
