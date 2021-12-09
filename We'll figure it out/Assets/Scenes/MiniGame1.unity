@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &6925651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -959,8 +959,8 @@ RectTransform:
   m_Father: {fileID: 747343153}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1443,7 +1443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &723721149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1970,6 +1970,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c4abe384e1e32489d8143f0be57140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rPot: {fileID: 1054602988}
+  lPot: {fileID: 221776269}
+  chutebtn: {fileID: 2058182461}
+  PressToContinue: 0
+  LadelFull: 0
+  LadelMode: 0
+  sugarInLadelCooked: 0
+  cookedSugarOut: 0
+  chute: 0
+  LeftPot: 3
+  RightPot: 3
   Player: {fileID: 620768973}
   cursorTexture: {fileID: 2800000, guid: 8ba1a5c5c5a9fbd4f80580fff0827861, type: 3}
   FullCursor: {fileID: 2800000, guid: 16ae905057f2c5841b5ed76fcb63eb1f, type: 3}
@@ -1979,7 +1990,7 @@ MonoBehaviour:
   UpSpriteMan: {fileID: 21300000, guid: 4141dc26519574043b69608060383e59, type: 3}
   Stir: {fileID: 723721151}
   Skim: {fileID: 514893114}
-  Ladel: {fileID: 0}
+  Ladel: {fileID: 1926149126}
   Cutscene: {fileID: 6925653}
   StartingPercentage: 50
   boilingHeat: 5
@@ -3001,7 +3012,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
