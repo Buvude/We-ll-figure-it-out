@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,12 +16,12 @@ public class PlayerMovement : MonoBehaviour
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
     public Sprite DownSpriteMan, UpSpriteMan, emptyimage, fullImage;
-    public Canvas Stir, Skim, Ladel, Cutscene;
+    public Canvas Stir, Skim, Ladel, Cutscene, gameOverMenu, pauseMenu;
     public int StartingPercentage = 50, boilingHeat=1, PlayerStrength=1,otherGoal=0, otherGoalGoal=10, otherGoalNumber=0, otherGoalGoalNumber=3;
     private int currentPercentage,CountDown;
     public Slider stirPercentage,skimPercentage;
     private bool lost = false;
-    public Text oGTXT, sTXT,CutsceneText;
+    public Text oGTXT, sTXT,GameOverReason;
     void Start()
     { 
         stirPercentage.value = StartingPercentage;
@@ -58,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
                     StartCoroutine("StirGoingDown");
                     LadelMode = false;
                 }
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space)&&!paused)
                 {
                     if (playerSlider.value >= .244 && playerSlider.value <= .466)
                     {
@@ -98,21 +99,26 @@ public class PlayerMovement : MonoBehaviour
                 oGTXT.text = otherGoal + "/" + otherGoalGoal + " Next Task Meter, right click when complete";
             }
             stirPercentage.value = currentPercentage;
-            if (Input.GetMouseButtonDown(0) && !lost)
+            if (Input.GetMouseButtonDown(0) && !lost && !paused)
             {
                 currentPercentage += PlayerStrength;
                 Player.sprite = DownSpriteMan;
                 //otherGoal += 1;
             }
-            if (Input.GetMouseButtonUp(0) && !lost)
+            if (currentPercentage >= 90 || currentPercentage <= 10)
+            {
+                GameOverReason.text = "loss reason: Sugar was left alone to long or was overstirred. Sugar was burned or you were burned by splashing sugar";
+                lost = true;
+            }
+            if (Input.GetMouseButtonUp(0) && !lost && !paused)
             {
                 Player.sprite = UpSpriteMan;
             }
-            if (Input.GetMouseButtonDown(1) && !lost)
+            if (Input.GetMouseButtonDown(1) && !lost && !paused)
             {
                 if (otherGoal < otherGoalGoal)
                 {
-                    Debug.Log("loss reason: moved onto next stage to early, sugar was burned");
+                    GameOverReason.text = "loss reason: moved onto next stage to early, sugar was burned";
                     lost = true;
                 }
                 else
@@ -126,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Space) && !LadelMode)
+            if (Input.GetKeyDown(KeyCode.Space) && !LadelMode && !paused)
             {
                 if (otherGoalNumber == otherGoalGoalNumber && otherGoal <= otherGoalGoal + 2 && otherGoal >= otherGoalGoal - 1)
                 {
@@ -140,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("loss reason: Moved onto next stage to early, sugar burned");
+                    GameOverReason.text = "loss reason: Moved onto next stage to early, sugar burned";
                     lost = true;
                 }
             }
@@ -151,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
             }*/
             if (otherGoal >= otherGoalGoal + 2)
             {
-                Debug.Log("Loss reason: moved to skimming to early, sugar burned");
+                GameOverReason.text = "Loss reason: moved to skimming to early, sugar burned";
                 lost = true;
             }
             if (skimPercentage.value == 100)
@@ -166,6 +172,42 @@ public class PlayerMovement : MonoBehaviour
                 stirPercentage.value = 50;
             }
         }
+        if (lost)
+        {
+            Time.timeScale = 0;
+            gameOverMenu.gameObject.SetActive(true);
+
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) 
+        {
+            if (paused)
+            {
+                Unpause();
+            }
+            else
+            {
+                Time.timeScale = 0;
+                pauseMenu.gameObject.SetActive(true);
+                paused = true;
+            }
+        }
+    }
+    public void RestartScene()
+    {
+        Unpause();
+        lost = false;
+        //Time.timeScale = 1;
+        SceneManager.LoadScene(2);
+    }
+    public void Unpause()
+    {
+        Time.timeScale = 1;
+        pauseMenu.gameObject.SetActive(false);
+        paused = false;
+    }
+    public void quit()
+    {
+        Application.Quit();
     }
    
     IEnumerator StirGoingDown()
@@ -192,7 +234,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     lost = true;
 
-                    Debug.Log("Loss reason: skimming took to long, sugar burned");
+                    GameOverReason.text = "Skimming took to long and the sugar was burnt"; 
                 }
             }
         }
