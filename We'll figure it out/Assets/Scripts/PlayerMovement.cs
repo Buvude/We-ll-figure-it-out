@@ -253,7 +253,7 @@ public class PlayerMovement : MonoBehaviour
         else if (!sugarInLadelCooked && LadelFull && !lost)
         {
             lost = true;
-            Debug.Log("Loss reason: Sent unfinished Sugar onto next stage");
+            GameOverReason.text="Loss reason: Sent unfinished Sugar onto next stage";
         }
     }
     public void SmallPotPressed()
@@ -266,7 +266,7 @@ public class PlayerMovement : MonoBehaviour
         else if(LadelFull && !lost && !cookedSugarOut&&!sugarInLadelCooked)
         {
             lost = true;
-            Debug.Log("Loss reason, uncooked sugar mixxed with cooked sugar");
+            GameOverReason.text="Loss reason, uncooked sugar mixxed with cooked sugar";
         }
         else if (!cookedSugarOut && !lost && !LadelFull)
         {
@@ -294,7 +294,7 @@ public class PlayerMovement : MonoBehaviour
         if(LadelFull&&sugarInLadelCooked && !lost)
         {
             lost = true;
-            Debug.Log("Loss reason: Mixxed cooked and uncooked sugar");
+            GameOverReason.text="Loss reason: Mixxed cooked and uncooked sugar";
         }
         if(LadelFull && !lost && !sugarInLadelCooked)
         {

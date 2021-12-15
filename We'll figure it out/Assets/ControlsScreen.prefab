@@ -331,7 +331,7 @@ MonoBehaviour:
     Right click to switch to
     skimming mode (only when instructed to)
 
-    Press space to switch to ladeling
+    Press space to switch to ladling
     mode (only when instructed to)
 
     click buttons on screen if needed
@@ -339,11 +339,7 @@ MonoBehaviour:
     press
     esc or ''P'' to pause
 
-    hold left ctrl during cutscene to make it faster
-
-    if
-    you restart and the timers aren''t going down, right click to gameover again
-    and restart again and it should work'
+    hold left ctrl during cutscene to make it faster'
 --- !u!1 &811667143137765623
 GameObject:
   m_ObjectHideFlags: 0
