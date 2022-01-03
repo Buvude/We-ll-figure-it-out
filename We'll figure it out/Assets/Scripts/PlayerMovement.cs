@@ -23,7 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private bool lost = false;
     public Text oGTXT, sTXT,GameOverReason;
     void Start()
-    { 
+    {
+        Time.timeScale = 1;
         stirPercentage.value = StartingPercentage;
         currentPercentage = StartingPercentage;
         StartCoroutine("StirGoingDown");
@@ -175,6 +176,7 @@ public class PlayerMovement : MonoBehaviour
         if (lost)
         {
             Time.timeScale = 0;
+            stirPercentage.value = 50;
             gameOverMenu.gameObject.SetActive(true);
 
         }
